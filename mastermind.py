@@ -1,8 +1,11 @@
 # ------ TO DO ------
 # * user can still give faulty input by entering a float, this has to be taken care of @ GetInput
-# Compare user input with generated serie
-# Reprogram so that globals are not needed
 # Remove uneccesary comments
+# Remove unecessary print from compareInput
+# Remove unecessary print from determineSerie
+# Write short and good comments
+# Check for PEP8
+
 # Add possibility to restart game after a win/lose
 
 from random import randint
@@ -13,6 +16,7 @@ def determineSerie():
     number = ''
     for i in range(4):
         number += str(randint(0,9))
+    print(number)
     return number
         
 
@@ -45,10 +49,10 @@ def checkInput():
 def compareInput():
     number = determineSerie()
     # print(guess)
-    print(number)
-    notGuessed = True
+    # print(number)
+    playGame = True
     round = 1
-    while True:
+    while playGame == True:
         correctChar = 0
         correctPos = 0
         guess = checkInput()
@@ -66,7 +70,14 @@ def compareInput():
 
         if correctPos is 4:
             print('You guessed correct in {} rounds!'.format(round))
-            break
+            print('Enter Y if you want to play again, anything else to quit.')
+            playAgain = input('Play again: ').lower()
+            if playAgain == 'y':
+                playGame = True
+                number = determineSerie()
+                round = 1
+            else:
+                break
 
         round += 1
 
