@@ -1,14 +1,5 @@
-# ------ TO DO ------
-# * user can still give faulty input by entering a float, this has to be taken care of @ GetInput
-# Remove uneccesary comments
-# Remove unecessary print from compareInput
-# Remove unecessary print from determineSerie
-# Write short and good comments
-# Check for PEP8
-
-# Add welcome message with explaination
-
 from random import randint
+
 
 def welcomeMessage():
     print('''
@@ -27,7 +18,7 @@ Enjoy!
 ''')
 
 
-# Determine numbers to be guessed
+# Determine numbers to be guessed.
 def determineSerie():
     number = ''
     for i in range(4):
@@ -35,7 +26,7 @@ def determineSerie():
     return number
         
 
-# Get user input, make sure it is a 4 digit int and communicate with user
+# Get user input and make sure it is a 4 digit int.
 def checkInput():
     message = ''
     intCheck = False
@@ -61,7 +52,7 @@ def checkInput():
     return guess
 
 
-# Check user input
+# Compare user input against computer serie.
 def compareInput():
     welcomeMessage()
     number = determineSerie()
@@ -79,9 +70,10 @@ def compareInput():
         for i in range(len(number)):
             if guess[i] == number[i]:
                 correctPos += 1
-
+        
         print('Correct: {} | Correct and correct position: {} | Your guess: {}'.format(correctChar, correctPos, guess))
 
+        # if all 4 are correct quit or play again.
         if correctPos is 4:
             print('You guessed correct in {} rounds!'.format(round))
             print('Enter Y if you want to play again, anything else to quit.')
