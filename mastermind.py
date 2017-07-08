@@ -1,19 +1,23 @@
 # ------ TO DO ------
 # * user can still give faulty input by entering a float, this has to be taken care of @ GetInput
-# Change input type from int to string for easier handling
+# Compare user input with generated serie
+# Reprogram so that globals are not needed
+# Remove uneccesary comments
+# Add possibility to restart game after a win/lose
 
 from random import randint
 
 
 # Determine numbers to be guessed
-def determineNumbers():
+def determineSerie():
     number = ''
     for i in range(4):
         number += str(randint(0,9))
+    return number
         
 
 # Get user input, make sure it is a 4 digit int and communicate with user
-def getInput():
+def checkInput():
     message = ''
     intCheck = False
     digitCheck = False
@@ -38,14 +42,33 @@ def getInput():
 
 
 # Check user input
-def checkUserInput():
-    guess = getInput()
-    print(guess)
+def compareInput():
+    number = determineSerie()
+    # print(guess)
+    print(number)
+    notGuessed = True
+    round = 1
+    while True:
+        correctChar = 0
+        correctPos = 0
+        guess = checkInput()
+        # 1 Check how many chars are in both guess and number, but not in right position necessarily
+        for char in guess:
+            if char in number:
+                correctChar += 1
+        
+        # 2 Check how many chars are in good position (if 4, then win).
+        for i in range(len(number)):
+            if guess[i] == number[i]:
+                correctPos += 1
 
-# Toon gegokte nummer en resultaten van vorige gok
-def showOutput():
-    pass
+        print('{} {} {}'.format(correctChar, correctPos, guess))
+
+        if correctPos is 4:
+            print('You guessed correct in {} rounds!'.format(round))
+            break
+
+        round += 1
 
 
-determineNumbers()
-checkUserInput()
+compareInput()
